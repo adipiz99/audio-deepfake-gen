@@ -1,5 +1,6 @@
 import os
 import gdown
+import zipfile
 from dotenv import load_dotenv
 
 
@@ -33,4 +34,12 @@ if os.path.exists('dataset/librisevoc.zip'):
 else:
     gdown.download('https://drive.google.com/uc?id={}'.format(FILE_ID), 'dataset/librisevoc.zip', quiet=False)
     print("INFO ===> Dataset downloaded successfully!")
+
+# Unzip the dataset
+print("INFO ===> Now trying to unzip the dataset...")
+with zipfile.ZipFile('dataset/librisevoc.zip', 'r') as zip_ref:
+    zip_ref.extractall('dataset')
+    print("INFO ===> Dataset unzipped successfully!")
+
+print("INFO ===> Dataset is ready!")
 
